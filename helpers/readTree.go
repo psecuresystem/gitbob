@@ -44,7 +44,7 @@ func deleteTree(rootDir string, deleted []string) {
 		if file.IsDir() {
 			deleteTree(fmt.Sprintf("%s/%s", rootDir, file.Name()), deleted)
 		} else {
-			// os.Remove(fmt.Sprintf("%s/%s", rootDir, file.Name()))
+			os.Remove(fmt.Sprintf("%s/%s", rootDir, file.Name()))
 			fmt.Printf("Deleting Path %s\n", fmt.Sprintf("%s/%s", rootDir, file.Name()))
 			deleted = append(deleted, fmt.Sprintf("%s/%s", rootDir, file.Name()))
 		}
