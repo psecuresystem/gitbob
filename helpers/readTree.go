@@ -19,7 +19,7 @@ func ReadTree(oid string, rootDir string) string {
 		fmt.Println("Make sure the oid is that of a tree")
 		return ""
 	}
-	deleteTree(".")
+	deleteTree(".", []string{})
 	// Loop through file Contents
 	for _, element := range strings.Split(string(fileDetails[1]), "\n") {
 		line := strings.Split(element, " ")
@@ -35,17 +35,18 @@ func ReadTree(oid string, rootDir string) string {
 }
 
 
-func deleteTree(rootDir string) {
+func deleteTree(rootDir string, deleted []string) {
 	fileInfo, _ := ioutil.ReadDir(rootDir)
 	for _, file := range fileInfo {
 		if file.Name() == ".gitb" {
 			continue
 		}
 		if file.IsDir() {
-			deleteTree(fmt.Sprintf("%s/%s", rootDir, file.Name()))
+			deleteTree(fmt.Sprintf("%s/%s", rootDir, file.Name()), deleted)
 		} else {
-			os.Remove(fmt.Sprintf("%s/%s", rootDir, file.Name()))
+			// os.Remove(fmt.Sprintf("%s/%s", rootDir, file.Name()))
 			fmt.Printf("Deleting Path %s\n", fmt.Sprintf("%s/%s", rootDir, file.Name()))
+			deleted = append(deleted, fmt.Sprintf("%s/%s", rootDir, file.Name()))
 		}
 	}
 }
