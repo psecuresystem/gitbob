@@ -38,7 +38,7 @@ func ReadTree(oid string, rootDir string) string {
 func deleteTree(rootDir string, deleted []string) {
 	fileInfo, _ := ioutil.ReadDir(rootDir)
 	for _, file := range fileInfo {
-		if file.Name() == ".gitb" {
+		if file.Name() == ".gitb" || file.Name() == ".git" {
 			continue
 		}
 		if file.IsDir() {
