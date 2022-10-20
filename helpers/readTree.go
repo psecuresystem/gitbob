@@ -3,7 +3,6 @@ package helpers
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -19,7 +18,6 @@ func ReadTree(oid string, rootDir string) string {
 		fmt.Println("Make sure the oid is that of a tree")
 		return ""
 	}
-	deleteTree(".", []string{})
 	// Loop through file Contents
 	for _, element := range strings.Split(string(fileDetails[1]), "\n") {
 		line := strings.Split(element, " ")
@@ -32,21 +30,4 @@ func ReadTree(oid string, rootDir string) string {
 		}
 	}
 	return ""
-}
-
-
-func deleteTree(rootDir string, deleted []string) {
-	fileInfo, _ := ioutil.ReadDir(rootDir)
-	for _, file := range fileInfo {
-		if file.Name() == ".gitb" || file.Name() == ".git" {
-			continue
-		}
-		if file.IsDir() {
-			deleteTree(fmt.Sprintf("%s/%s", rootDir, file.Name()), deleted)
-		} else {
-			os.Remove(fmt.Sprintf("%s/%s", rootDir, file.Name()))
-			fmt.Printf("Deleting Path %s\n", fmt.Sprintf("%s/%s", rootDir, file.Name()))
-			deleted = append(deleted, fmt.Sprintf("%s/%s", rootDir, file.Name()))
-		}
-	}
 }
