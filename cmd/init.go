@@ -34,6 +34,8 @@ var initCmd = &cobra.Command{
 		if _, err := os.Stat(".gitb"); os.IsNotExist(err) {
 			os.Mkdir(".gitb", os.ModePerm)
 			os.MkdirAll(".gitb/objects", os.ModePerm)
+			os.MkdirAll(".gitb/refs", os.ModePerm)
+			os.MkdirAll(".gitb/refs/tags", os.ModePerm)
 			fmt.Printf("Empty Repository Created in %s/.gitb\n", wd)
 		} else {
 			fmt.Printf("Re Initialized Repository in %s/.gitb\n", wd)

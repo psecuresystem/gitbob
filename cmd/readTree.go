@@ -32,7 +32,7 @@ var readTreeCmd = &cobra.Command{
 			fmt.Println("Bruh Seriously, Where's your oid")
 			return
 		}
-		helpers.ReadTree(args[0], ".")
+		helpers.ReadTree(helpers.ParseOid(args[0]), ".")
 	},
 }
 
