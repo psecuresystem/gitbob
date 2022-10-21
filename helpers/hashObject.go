@@ -17,6 +17,5 @@ func HashObject(fileContent string, typeOf string) string {
 	file, _ := os.Create(pathName)
 
 	file.Write(bytes.Join([][]byte{[]byte(typeOf)[:], []byte(fileContent)}, []byte{0x00}))
-	fmt.Printf("Successfully written object %s \n", hashedFileName)
 	return hashedFileName
 }

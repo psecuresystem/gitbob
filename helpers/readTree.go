@@ -21,6 +21,9 @@ func ReadTree(oid string, rootDir string) string {
 	// Loop through file Contents
 	for _, element := range strings.Split(string(fileDetails[1]), "\n") {
 		line := strings.Split(element, " ")
+		if line[2] == ".git" {
+			continue
+		}
 		if line[0] == "tree" {
 			ReadTree(line[1], fmt.Sprintf("%s/%s", rootDir, line[2]))
 		} else {
