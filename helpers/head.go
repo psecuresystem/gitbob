@@ -35,3 +35,5 @@ func GetRef(from string) string {
 	}
 	return ""
 }
+
+func IterRefs() {}
